@@ -22,6 +22,8 @@ return Registry.register(Registries.ITEM, Identifier.of(Wizardry.MOD_ID, name), 
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.add(REGULAR_WAND);
+            entries.add(MAGIC_ESSENCE);
+            entries.add(MAGIC_PARTICLES);
         });
 
 
