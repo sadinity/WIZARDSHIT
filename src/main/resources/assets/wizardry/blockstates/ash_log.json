@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=y": { "model": "wizardry:block/ash_log" },
+    "axis=x": { "model": "wizardry:block/ash_log", "x": 90, "y": 90 },
+    "axis=z": { "model": "wizardry:block/ash_log", "x": 90 }
+  }
+}

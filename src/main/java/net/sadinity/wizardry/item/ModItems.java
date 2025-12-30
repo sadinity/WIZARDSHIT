@@ -20,12 +20,6 @@ return Registry.register(Registries.ITEM, Identifier.of(Wizardry.MOD_ID, name), 
 
     Wizardry.LOGGER.info("Registering Mod Items for " + Wizardry.MOD_ID);
 
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
-            entries.add(REGULAR_WAND);
-            entries.add(MAGIC_ESSENCE);
-            entries.add(MAGIC_PARTICLES);
-        });
-
 
     }
          }

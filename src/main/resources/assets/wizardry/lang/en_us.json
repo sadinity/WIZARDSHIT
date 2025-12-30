@@ -1,5 +1,18 @@
 {
+  "itemgroup.wizardry": "Wizardry",
   "item.wizardry.regular_wand": "Regular Wand",
   "item.wizardry.magic_essence": "Magic Essence",
-  "item.wizardry.magic_particles": "Magic Particles"
+  "item.wizardry.magic_particles": "Magic Particles",
+  "block.wizardry.willow_log": "Willow Log",
+  "block.wizardry.stripped_willow_log": "Stripped Willow Log",
+  "block.wizardry.willow_planks": "Willow Planks",
+  "block.wizardry.willow_leaves": "Willow Leaves",
+  "block.wizardry.amber_leaves": "Amber Leaves",
+  "block.wizardry.amber_planks": "Amber planks",
+  "block.wizardry.amber_log": "Amber Log",
+  "block.wizardry.stripped_amber_log": "Stripped Amber Log",
+  "block.wizardry.ash_leaves": "Ash Leaves",
+  "block.wizardry.ash_planks": "Ash planks",
+  "block.wizardry.ash_log": "Ash Log",
+  "block.wizardry.stripped_ash_log": "Stripped Ash Log"
 }
