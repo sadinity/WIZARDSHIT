@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern": [
+    " S",
+    "E "
+  ],
+
+  "key": {
+    "E": { "item": "minecraft:stick" },
+    "S": { "item": "wizardry:magic_essence" }
+  },
+
+  "result": {
+    "id": "wizardry:regular_wand",
+    "count": 1
+  }
+}

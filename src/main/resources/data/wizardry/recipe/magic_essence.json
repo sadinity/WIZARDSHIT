@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern": [
+    "SS",
+    "SS"
+
+  ],
+
+  "key": {
+    "S": { "item": "wizardry:magic_particles" }
+  },
+
+  "result": {
+    "id": "wizardry:magic_essence",
+    "count": 1
+  }
+}
