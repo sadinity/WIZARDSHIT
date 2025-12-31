@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "wizardry:item/elder_trapdoor"
-  }
+  "parent": "wizardry:block/elder_trapdoor_closed"
 }

@@ -1,41 +1,6 @@
 {
-  "multipart": [
-    {
-      "when": { "half": "lower", "hinge": "left", "open": "false", "facing": "north" },
-      "apply": { "model": "wizardry:block/elder_door_bottom" }
-    },
-    {
-      "when": { "half": "lower", "hinge": "right", "open": "false", "facing": "north" },
-      "apply": { "model": "wizardry:block/elder_door_bottom_hinge" }
-    },
-    {
-      "when": { "half": "lower", "hinge": "left", "open": "true", "facing": "north" },
-      "apply": { "model": "wizardry:block/elder_door_bottom", "y": 90 }
-    },
-    {
-      "when": { "half": "lower", "hinge": "right", "open": "true", "facing": "north" },
-      "apply": { "model": "wizardry:block/elder_door_bottom_hinge", "y": 90 }
-    },
-
-    {
-      "when": { "half": "upper", "hinge": "left", "open": "false", "facing": "north" },
-      "apply": { "model": "wizardry:block/elder_door_top" }
-    },
-    {
-      "when": { "half": "upper", "hinge": "right", "open": "false", "facing": "north" },
-      "apply": { "model": "wizardry:block/elder_door_top_hinge" }
-    },
-    {
-      "when": { "half": "upper", "hinge": "left", "open": "true", "facing": "north" },
-      "apply": { "model": "wizardry:block/elder_door_top", "y": 90 }
-    },
-    {
-      "when": { "half": "upper", "hinge": "right", "open": "true", "facing": "north" },
-      "apply": { "model": "wizardry:block/elder_door_top_hinge", "y": 90 }
-    },
-
-    { "when": { "facing": "east" },  "apply": { "y": 90 } },
-    { "when": { "facing": "south" }, "apply": { "y": 180 } },
-    { "when": { "facing": "west" },  "apply": { "y": 270 } }
-  ]
+  "variants": {
+    "half=lower": { "model": "wizardry:block/elder_door_bottom_all" },
+    "half=upper": { "model": "wizardry:block/elder_door_top_all" }
+  }
 }
