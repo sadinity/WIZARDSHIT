@@ -14,5 +14,11 @@
   "block.wizardry.ash_leaves": "Ash Leaves",
   "block.wizardry.ash_planks": "Ash planks",
   "block.wizardry.ash_log": "Ash Log",
-  "block.wizardry.stripped_ash_log": "Stripped Ash Log"
+  "block.wizardry.stripped_ash_log": "Stripped Ash Log",
+  "block.wizardry.stripped_elder_log": "Stripped Elder Log",
+  "block.wizardry.elder_log": "Elder Log",
+  "block.wizardry.elder_leaves": "Elder Leaves",
+  "block.wizardry.elder_planks": "Elder planks",
+  "block.wizardry.elder_door": "Elder Door",
+  "block.wizardry.elder_trapdoor": "Elder Trapdoor"
 }

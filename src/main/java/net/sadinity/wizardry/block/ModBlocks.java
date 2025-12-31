@@ -1,9 +1,6 @@
 package net.sadinity.wizardry.block;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.LeavesBlock;
-import net.minecraft.block.PillarBlock;
+import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -11,6 +8,9 @@ import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.sadinity.wizardry.Wizardry;
+
+
+
 
 public class ModBlocks {
 
@@ -98,6 +98,62 @@ public class ModBlocks {
                     .nonOpaque())
     );
 
+    public static final Block ELDER_LOG = registerBlock(
+            "elder_log",
+            new PillarBlock(AbstractBlock.Settings.create()
+                    .strength(2.0f)
+                    .sounds(BlockSoundGroup.WOOD))
+    );
+
+    public static final Block STRIPPED_ELDER_LOG = registerBlock(
+            "stripped_elder_log",
+            new PillarBlock(AbstractBlock.Settings.create()
+                    .strength(2.0f)
+                    .sounds(BlockSoundGroup.WOOD))
+    );
+
+    public static final Block ELDER_PLANKS = registerBlock(
+            "elder_planks",
+            new Block(AbstractBlock.Settings.create()
+                    .strength(2.0f)
+                    .sounds(BlockSoundGroup.WOOD)
+            )
+    );
+
+    public static final Block ELDER_DOOR = registerBlock(
+            "elder_door",
+            new DoorBlock(
+                    BlockSetType.OAK,
+                    AbstractBlock.Settings.create()
+                            .strength(3.0f)
+                            .nonOpaque()
+                            .sounds(BlockSoundGroup.WOOD)
+            )
+    );
+
+
+
+    public static final Block ELDER_TRAPDOOR = registerBlock(
+            "elder_trapdoor",
+            new TrapdoorBlock(
+                    BlockSetType.OAK,
+                    AbstractBlock.Settings.create()
+                            .strength(3.0f)
+                            .nonOpaque()
+                            .sounds(BlockSoundGroup.WOOD)
+            )
+    );
+
+
+
+
+    public static final Block ELDER_LEAVES = registerBlock(
+            "elder_leaves",
+            new LeavesBlock(AbstractBlock.Settings.create()
+                    .strength(0.2f)
+                    .sounds(BlockSoundGroup.GRASS)
+                    .nonOpaque())
+    );
 
 
 
@@ -105,8 +161,14 @@ public class ModBlocks {
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
-        return Registry.register(Registries.BLOCK, Identifier.of(Wizardry.MOD_ID, name), block);
+        return Registry.register(
+                Registries.BLOCK,
+                Identifier.of(Wizardry.MOD_ID, name),
+                block
+        );
     }
+
+
 
     private static void registerBlockItem(String name, Block block) {
         Registry.register(Registries.ITEM, Identifier.of(Wizardry.MOD_ID, name),

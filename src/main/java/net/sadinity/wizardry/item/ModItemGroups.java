@@ -29,6 +29,13 @@ public class ModItemGroups {
                         entries.add(ModBlocks.ASH_PLANKS);
                         entries.add(ModBlocks.ASH_LEAVES);
 
+                        entries.add(ModBlocks.ELDER_LOG);
+                        entries.add(ModBlocks.STRIPPED_ELDER_LOG);
+                        entries.add(ModBlocks.ELDER_PLANKS);
+                        entries.add(ModBlocks.ELDER_DOOR);
+                        entries.add(ModBlocks.ELDER_TRAPDOOR);
+                        entries.add(ModBlocks.ELDER_LEAVES);
+
                         entries.add(ModBlocks.WILLOW_LOG);
                         entries.add(ModBlocks.STRIPPED_WILLOW_LOG);
                         entries.add(ModBlocks.WILLOW_PLANKS);

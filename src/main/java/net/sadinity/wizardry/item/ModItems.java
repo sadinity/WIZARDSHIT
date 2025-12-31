@@ -12,6 +12,7 @@ public class ModItems {
     public static final Item REGULAR_WAND = registerItem("regular_wand", new Item(new Item.Settings()));
     public static final Item MAGIC_ESSENCE = registerItem("magic_essence", new Item(new Item.Settings()));
     public static final Item MAGIC_PARTICLES = registerItem("magic_particles", new Item(new Item.Settings()));
+    public static final Item ELDER_DOOR = registerItem("elder_door", new Item(new Item.Settings()));
 
     private  static Item registerItem(String name, Item item) {
 return Registry.register(Registries.ITEM, Identifier.of(Wizardry.MOD_ID, name), item);
