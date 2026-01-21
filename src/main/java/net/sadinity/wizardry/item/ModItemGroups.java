@@ -45,9 +45,10 @@ public class ModItemGroups {
                         entries.add(ModItems.REGULAR_WAND);
                         entries.add(ModItems.MAGIC_ESSENCE);
                         entries.add(ModItems.MAGIC_PARTICLES);
+
+                        entries.add(ModItems.FLUTTER_SPAWN_EGG);
                         // later items hier
-                    })
-                    .build()
+                    }).build()
     );
 
     public static void registerItemGroups() {
