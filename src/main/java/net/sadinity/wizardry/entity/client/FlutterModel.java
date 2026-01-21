@@ -162,10 +162,19 @@ public class FlutterModel
                           float ageInTicks, float netHeadYaw, float headPitch) {
 
         this.getPart().traverse().forEach(ModelPart::resetTransform);
-        this.setHeadAngels(netHeadYaw, headPitch);
+
 
         boolean isMoving =
                 entity.getVelocity().horizontalLengthSquared() > 0.0001;
+
+        if (!isMoving || entity.isSitting()) {
+            // idle / zittend → kijken mag
+            this.setHeadAngels(netHeadYaw, headPitch);
+        } else {
+            // tijdens volgen → hoofd terug naar neutraal
+            this.head.yaw *= 0.6F;
+            this.head.pitch *= 0.6F;
+        }
 
         if (entity.isSitting()) {
             this.updateAnimation(

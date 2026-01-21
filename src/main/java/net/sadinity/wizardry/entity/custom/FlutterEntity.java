@@ -36,13 +36,22 @@ public class FlutterEntity extends TameableEntity {
     // 🔹 GOALS
     @Override
     protected void initGoals() {
-        this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new SitGoal(this));
-        this.goalSelector.add(2, new FollowOwnerGoal(this, 1.0D, 5.0F, 2.0F));
-        this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.4D));
-        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 4.0F));
-        this.goalSelector.add(5, new LookAroundGoal(this));
+
+        this.goalSelector.add(2,
+                new FollowOwnerGoal(this, 1.2, 6.0F, 2.0F));
+
+        this.goalSelector.add(3,
+                new WanderAroundGoal(this, 1.0));
+
+        this.goalSelector.add(4,
+                new LookAtEntityGoal(this, PlayerEntity.class, 4.0F));
+
+        this.goalSelector.add(5,
+                new LookAroundGoal(this));
     }
+
+
 
     // 🔹 ANIMATION STATE (CLIENT ONLY)
     @Override
@@ -66,7 +75,7 @@ public class FlutterEntity extends TameableEntity {
         ItemStack stack = player.getStackInHand(hand);
 
         if (this.getWorld().isClient) {
-            return ActionResult.SUCCESS;
+            return ActionResult.PASS;
         }
 
         // TAMEN
