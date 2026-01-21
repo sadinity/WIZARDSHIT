@@ -199,7 +199,8 @@ public class FlutterModel
     private void  setHeadAngels(float headYaw, float headPitch) {
         headYaw = MathHelper.clamp(headYaw, -30.0F, 30.0F);
         headPitch = MathHelper.clamp(headPitch, -25.0F, 45.0F);
-
+        this.head.yaw = headYaw * ((float)Math.PI / 180F);
+        this.head.pitch = headPitch * ((float)Math.PI / 180F);
     }
 
     @Override
