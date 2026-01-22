@@ -188,10 +188,11 @@ public class FlutterModel
             this.animateMovement(
                     FlutterAnimations.FLUTTER_WALK,
                     limbSwing,
-                    1.0F,   // force amount
-                    2.0F,
-                    2.5F
+                    limbSwingAmount,
+                    2.5F,   // speed (hoger = sneller)
+                    2.0F    // strength
             );
+
         }
         else {
             this.updateAnimation(
