@@ -491,12 +491,12 @@ public class FlutterAnimations {
                 .addBoneAnimation("wingR", new Transformation(Transformation.Targets.ROTATE,
                         new Keyframe(0.0F, AnimationHelper.createRotationalVector(-5.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                         new Keyframe(1.3333F, AnimationHelper.createRotationalVector(-5.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
-                        new Keyframe(2.5F, AnimationHelper.createRotationalVector(-7.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
+                        new Keyframe(2.5F, AnimationHelper.createRotationalVector(-5.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
                 ))
                 .addBoneAnimation("wingL", new Transformation(Transformation.Targets.ROTATE,
                         new Keyframe(0.0F, AnimationHelper.createRotationalVector(-2.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                         new Keyframe(1.3333F, AnimationHelper.createRotationalVector(-3.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
-                        new Keyframe(2.5F, AnimationHelper.createRotationalVector(-5.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
+                        new Keyframe(2.5F, AnimationHelper.createRotationalVector(-2.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
                 ))
                 .addBoneAnimation("head", new Transformation(Transformation.Targets.ROTATE,
                         new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -523,17 +523,22 @@ public class FlutterAnimations {
                         new Keyframe(2.5F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 77.5F), Transformation.Interpolations.LINEAR)
                 ))
                 .addBoneAnimation("tail", new Transformation(Transformation.Targets.TRANSLATE,
-                        new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
-                        new Keyframe(2.5F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
+                        new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.4F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
                 ))
                 .addBoneAnimation("Rleg", new Transformation(Transformation.Targets.ROTATE,
                         new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, -75.0F), Transformation.Interpolations.LINEAR)
                 ))
+                .addBoneAnimation("Rleg", new Transformation(Transformation.Targets.TRANSLATE,
+                        new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, -1.0F, 0.0F), Transformation.Interpolations.LINEAR)
+                ))
                 .addBoneAnimation("Lleg", new Transformation(Transformation.Targets.ROTATE,
                         new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, -70.5F), Transformation.Interpolations.LINEAR)
                 ))
+                .addBoneAnimation("Lleg", new Transformation(Transformation.Targets.TRANSLATE,
+                        new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, -0.1F, 0.0F), Transformation.Interpolations.LINEAR)
+                ))
                 .addBoneAnimation("full2", new Transformation(Transformation.Targets.TRANSLATE,
-                        new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, -8.6F, 0.0F), Transformation.Interpolations.LINEAR)
+                        new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, -24.0F, 0.0F), Transformation.Interpolations.LINEAR)
                 ))
                 .build();
 

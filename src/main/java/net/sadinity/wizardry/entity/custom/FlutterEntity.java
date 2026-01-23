@@ -1,5 +1,6 @@
 package net.sadinity.wizardry.entity.custom;
 
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -59,16 +60,19 @@ public class FlutterEntity extends TameableEntity {
     public void tick() {
         super.tick();
 
-        if (!this.getWorld().isClient) return;
-
         if (this.isInSittingPose()) {
-            this.sitAnimationState.startIfNotRunning(this.age);
-            this.idleAnimationState.stop();
+            this.setPose(EntityPose.SITTING);
+
+            sitAnimationState.startIfNotRunning(this.age);
+            idleAnimationState.stop();
         } else {
-            this.idleAnimationState.startIfNotRunning(this.age);
-            this.sitAnimationState.stop();
+            this.setPose(EntityPose.STANDING);
+
+            idleAnimationState.startIfNotRunning(this.age);
+            sitAnimationState.stop();
         }
     }
+
 
 
 
@@ -120,4 +124,6 @@ public class FlutterEntity extends TameableEntity {
     public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return null;
     }
+
+
 }

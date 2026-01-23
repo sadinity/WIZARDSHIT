@@ -214,7 +214,12 @@ public class FlutterModel extends SinglePartEntityModel<FlutterEntity> {
                     entity.sitAnimationState,
                     FlutterAnimations.FLUTTER_SIT,
                     ageInTicks
+
             );
+            this.full2.pivotY = 32.5F;
+
+
+
         } else if (limbSwingAmount > 0.05F) {
             this.animateMovement(
                     FlutterAnimations.FLUTTER_WALK,

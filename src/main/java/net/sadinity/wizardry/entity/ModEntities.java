@@ -12,7 +12,7 @@ public class ModEntities {
 public static final EntityType<FlutterEntity> FLUTTER = Registry.register(Registries.ENTITY_TYPE,
         Identifier.of(Wizardry.MOD_ID, "flutter"),
         EntityType.Builder.create(FlutterEntity::new, SpawnGroup.CREATURE)
-                .dimensions(1f, 1f).build());
+                .dimensions(0.6f, 0.9f).build());
 
     public  static void registerModEntities() {
         Wizardry.LOGGER.info("Registering Mod Entities for " + Wizardry.MOD_ID);
