@@ -59,14 +59,17 @@ public class FlutterEntity extends TameableEntity {
     public void tick() {
         super.tick();
 
+        if (!this.getWorld().isClient) return;
+
         if (this.isInSittingPose()) {
-            sitAnimationState.startIfNotRunning(this.age);
-            idleAnimationState.stop();
+            this.sitAnimationState.startIfNotRunning(this.age);
+            this.idleAnimationState.stop();
         } else {
-            idleAnimationState.startIfNotRunning(this.age);
-            sitAnimationState.stop();
+            this.idleAnimationState.startIfNotRunning(this.age);
+            this.sitAnimationState.stop();
         }
     }
+
 
 
     // 🔹 INTERACTION
