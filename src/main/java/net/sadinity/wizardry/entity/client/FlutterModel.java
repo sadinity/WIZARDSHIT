@@ -236,7 +236,20 @@ public class FlutterModel extends SinglePartEntityModel<FlutterEntity> {
             );
         }
 
-        this.head.yaw = netHeadYaw * 0.017453292F;
-        this.head.pitch = headPitch * 0.017453292F;
+        boolean isFollowing =
+                entity.isTamed()
+                        && entity.getOwner() != null
+                        && entity.distanceTo(entity.getOwner()) > 3.5F;
+
+        if (!isFollowing) {
+            // Idle / Sit → hoofd mag bewegen
+            this.head.yaw = MathHelper.clamp(netHeadYaw, -25F, 25F) * 0.017453292F;
+            this.head.pitch = MathHelper.clamp(headPitch, -20F, 30F) * 0.017453292F;
+        } else {
+            // Volgen → hoofd bijna vast
+            this.head.yaw *= 0.15F;
+            this.head.pitch *= 0.15F;
+        }
+
     }
 }
