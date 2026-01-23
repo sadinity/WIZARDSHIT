@@ -10,6 +10,7 @@ import net.minecraft.util.math.MathHelper;
 import net.sadinity.wizardry.Wizardry;
 import net.sadinity.wizardry.entity.custom.FlutterEntity;
 
+
 public class FlutterModel
         extends SinglePartEntityModel<FlutterEntity> {
 
@@ -158,53 +159,43 @@ public class FlutterModel
 
     }
     @Override
-    public void setAngles(FlutterEntity entity, float limbSwing, float limbSwingAmount,
-                          float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setAngles(
 
+    FlutterEntity entity,
+            float limbSwing,
+            float limbSwingAmount,
+            float ageInTicks,
+            float netHeadYaw,
+            float headPitch
+    ) {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
 
+        // 1️⃣ Zit hij? → SIT animatie
+        if (entity.isInSittingPose()) {
+            this.updateAnimation(entity.sitAnimationState, FlutterAnimations.FLUTTER_SIT, ageInTicks);
 
-        boolean isMoving =
-                entity.getVelocity().horizontalLengthSquared() > 0.0001;
-
-        if (!isMoving || entity.isSitting()) {
-            // idle / zittend → kijken mag
-            this.setHeadAngels(netHeadYaw, headPitch);
-        } else {
-            // tijdens volgen → hoofd terug naar neutraal
-            this.head.yaw *= 0.6F;
-            this.head.pitch *= 0.6F;
         }
-
-        if (entity.isSitting()) {
-            this.updateAnimation(
-                    entity.idleAnimationState,
-                    FlutterAnimations.FLUTTER_SIT,
-                    ageInTicks,
-                    1.0F
-            );
-        }
-        else if (isMoving) {
+        // 2️⃣ Loopt hij? → WALK animatie
+        else if (limbSwingAmount > 0.05F) {
             this.animateMovement(
                     FlutterAnimations.FLUTTER_WALK,
                     limbSwing,
                     limbSwingAmount,
-                    2.5F,   // speed (hoger = sneller)
-                    2.0F    // strength
+                    2.5F,
+                    2.0F
             );
-
         }
+        // 3️⃣ Anders → IDLE
         else {
-            this.updateAnimation(
-                    entity.idleAnimationState,
-                    FlutterAnimations.FLUTTER_IDLE,
-                    ageInTicks,
-                    1.0F
-            );
+            this.updateAnimation(entity.idleAnimationState, FlutterAnimations.FLUTTER_IDLE, ageInTicks);
+
         }
 
+        // Head rotatie (altijd)
+        this.head.yaw = netHeadYaw * 0.017453292F;
+        this.head.pitch = headPitch * 0.017453292F;
+    }
 
-}
 
     private void  setHeadAngels(float headYaw, float headPitch) {
         headYaw = MathHelper.clamp(headYaw, -30.0F, 30.0F);

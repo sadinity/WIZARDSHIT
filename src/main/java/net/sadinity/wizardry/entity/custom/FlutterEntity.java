@@ -22,6 +22,7 @@ public class FlutterEntity extends TameableEntity {
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState sitAnimationState = new AnimationState();
 
+
     public FlutterEntity(EntityType<? extends TameableEntity> type, World world) {
         super(type, world);
     }
@@ -58,16 +59,15 @@ public class FlutterEntity extends TameableEntity {
     public void tick() {
         super.tick();
 
-        if (!this.getWorld().isClient()) return;
-
-        if (this.isSitting()) {
-            idleAnimationState.stop();
+        if (this.isInSittingPose()) {
             sitAnimationState.startIfNotRunning(this.age);
+            idleAnimationState.stop();
         } else {
-            sitAnimationState.stop();
             idleAnimationState.startIfNotRunning(this.age);
+            sitAnimationState.stop();
         }
     }
+
 
     // 🔹 INTERACTION
     @Override
@@ -75,7 +75,7 @@ public class FlutterEntity extends TameableEntity {
         ItemStack stack = player.getStackInHand(hand);
 
         if (this.getWorld().isClient) {
-            return ActionResult.PASS;
+            return ActionResult.SUCCESS;
         }
 
         // TAMEN
@@ -88,6 +88,7 @@ public class FlutterEntity extends TameableEntity {
                 this.setOwner(player);
                 this.setTamed(true, true);
                 this.setSitting(true);
+                this.getNavigation().stop();
                 this.getWorld().sendEntityStatus(this, (byte) 7);
             } else {
                 this.getWorld().sendEntityStatus(this, (byte) 6);
@@ -105,6 +106,7 @@ public class FlutterEntity extends TameableEntity {
 
         return super.interactMob(player, hand);
     }
+
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
