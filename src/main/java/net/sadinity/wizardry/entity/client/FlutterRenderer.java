@@ -21,9 +21,17 @@ public class FlutterRenderer
 
     @Override
     public Identifier getTexture(FlutterEntity entity) {
-        return Identifier.of(
-                Wizardry.MOD_ID,
-                "textures/entity/flutter.png"
-        );
+        return switch (entity.getVariant()) {
+            case 1 -> Identifier.of("wizardry", "textures/entity/flutter_1.png");
+            case 2 -> Identifier.of("wizardry", "textures/entity/flutter_2.png");
+            case 3 -> Identifier.of("wizardry", "textures/entity/flutter_3.png");
+            case 4 -> Identifier.of("wizardry", "textures/entity/flutter_4.png");
+            case 5 -> Identifier.of("wizardry", "textures/entity/flutter_5.png");
+            case 6 -> Identifier.of("wizardry", "textures/entity/flutter_6.png");
+            default -> Identifier.of("wizardry", "textures/entity/flutter.png");
+        };
     }
+
+
+
 }

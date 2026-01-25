@@ -1,7 +1,6 @@
 package net.sadinity.wizardry.entity.custom;
 
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.EntityType;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -9,16 +8,20 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.AnimationState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import java.awt.*;
 
 
@@ -26,6 +29,9 @@ public class FlutterEntity extends TameableEntity {
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState sitAnimationState = new AnimationState();
+
+    private static final TrackedData<Integer> VARIANT =
+            DataTracker.registerData(FlutterEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
 
     public FlutterEntity(EntityType<? extends TameableEntity> type, World world) {
@@ -42,7 +48,7 @@ public class FlutterEntity extends TameableEntity {
             double backZ =  Math.cos(yawRad);
 
             this.getWorld().addParticle(
-                    ParticleTypes.GLOW,
+                    ParticleTypes.END_ROD,
 
                     // X — achter de Flutter + jouw spread
                     this.getX()
@@ -91,6 +97,20 @@ public class FlutterEntity extends TameableEntity {
 
         this.goalSelector.add(5,
                 new LookAroundGoal(this));
+    }
+
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(VARIANT, 0);
+    }
+
+    public int getVariant() {
+        return this.dataTracker.get(VARIANT);
+    }
+
+    public void setVariant(int variant) {
+        this.dataTracker.set(VARIANT, variant);
     }
 
 
@@ -169,6 +189,29 @@ public class FlutterEntity extends TameableEntity {
         }
 
         return super.interactMob(player, hand);
+    }
+
+    @Override
+    public EntityData initialize(
+            ServerWorldAccess world,
+            LocalDifficulty difficulty,
+            SpawnReason spawnReason,
+            @Nullable EntityData entityData
+    ) {
+        this.setVariant(this.random.nextInt(7)); // ← change 3 to number of variants
+        return super.initialize(world, difficulty, spawnReason, entityData);
+    }
+
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        nbt.putInt("Variant", this.getVariant());
+    }
+
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        this.setVariant(nbt.getInt("Variant"));
     }
 
 
