@@ -11,6 +11,7 @@ import net.minecraft.util.Rarity;
 import net.sadinity.wizardry.Wizardry;
 import net.sadinity.wizardry.entity.ModEntities;
 import net.sadinity.wizardry.item.custom.GrimoireItem;
+import net.sadinity.wizardry.item.custom.QuizItem;
 
 public class ModItems {
     public static final Item REGULAR_WAND = registerItem("regular_wand", new Item(new Item.Settings()));
@@ -23,6 +24,13 @@ public class ModItems {
             Identifier.of("wizardry", "grimoire"),
             new GrimoireItem(new Item.Settings().maxCount(1))
     );
+    public static final Item QUIZ_ITEM = Registry.register(
+            Registries.ITEM,
+            Identifier.of("wizardry", "quiz_item"),
+            new QuizItem(new Item.Settings().maxCount(1))
+    );
+
+
 
     public static final Item FLUTTER_SPAWN_EGG = registerItem("flutter_spawn_egg",
             new SpawnEggItem(ModEntities.FLUTTER, 0xe3fffe,0xafd1e3, new Item.Settings()));
