@@ -37,41 +37,8 @@ public class FlutterEntity extends TameableEntity {
     public FlutterEntity(EntityType<? extends TameableEntity> type, World world) {
         super(type, world);
     }
-    private void spawnFlutterParticles() {
-        if (this.random.nextFloat() < 0.05F) {
 
-            // Kijkrichting van de Flutter
-            double yawRad = Math.toRadians(this.getYaw());
 
-            // Richting naar achteren
-            double backX = -Math.sin(yawRad);
-            double backZ =  Math.cos(yawRad);
-
-            this.getWorld().addParticle(
-                    ParticleTypes.END_ROD,
-
-                    // X — achter de Flutter + jouw spread
-                    this.getX()
-                            + backX * 0.6
-                            + (this.random.nextDouble() - 0.5) * 1.0,
-
-                    // Y — wing hoogte + kleine variatie
-                    this.getY()
-                            + 0.6
-                            + (this.random.nextDouble() - 0.5) * 0.3,
-
-                    // Z — achter de Flutter + jouw spread
-                    this.getZ()
-                            + backZ * 0.6
-                            + (this.random.nextDouble() - 0.5) * 1.0,
-
-                    // Kleine trail beweging
-                    backX * 0.01,
-                    0.01,
-                    backZ * 0.01
-            );
-        }
-    }
 
 
     // 🔹 ATTRIBUTES
@@ -115,7 +82,7 @@ public class FlutterEntity extends TameableEntity {
 
 
 
-    // 🔹 ANIMATION STATE (CLIENT ONLY)
+
     @Override
     public void tick() {
         super.tick();
@@ -132,9 +99,7 @@ public class FlutterEntity extends TameableEntity {
             idleAnimationState.startIfNotRunning(this.age);
             sitAnimationState.stop();
         }
-        if (this.getWorld().isClient) {
-            spawnFlutterParticles();
-        }
+
 
 
         if (!this.isOnGround() && this.getVelocity().y < 0.0D) {
@@ -142,18 +107,17 @@ public class FlutterEntity extends TameableEntity {
 
             this.setVelocity(
                     motion.x,
-                    motion.y * 0.6D, // glide strength (lower = floatier)
+                    motion.y * 0.6D,
                     motion.z
             );
 
-            this.fallDistance = 0.0F; // prevent fall damage
+            this.fallDistance = 0.0F;
         }
     }
 
 
 
 
-        // 🔹 INTERACTION
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
