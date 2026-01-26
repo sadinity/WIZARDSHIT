@@ -27,7 +27,9 @@ public class ModItems {
     public static final Item QUIZ_ITEM = Registry.register(
             Registries.ITEM,
             Identifier.of("wizardry", "quiz_item"),
-            new QuizItem(new Item.Settings().maxCount(1))
+            new QuizItem(new Item.Settings().maxCount(1)
+                    .rarity(Rarity.RARE)
+            )
     );
 
 

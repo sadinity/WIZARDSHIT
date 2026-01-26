@@ -18,6 +18,7 @@
 		"main": [
 			"net.sadinity.wizardry.Wizardry"
 		],
+
 		"fabric-datagen": [
 			"net.sadinity.wizardry.WizardryDataGenerator"
 		],

@@ -3,7 +3,12 @@ package net.sadinity.wizardry.screen;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class QuizScreen extends Screen {
 
@@ -12,7 +17,7 @@ public class QuizScreen extends Screen {
        ========================= */
 
     private int currentPage = 0;      // 0 = welcome, 1 = quiz
-    private int currentQuestion = 0;  // index of current question
+    private int currentQuestion = 0;
 
     /* =========================
        CLANS
@@ -108,17 +113,31 @@ public class QuizScreen extends Screen {
     };
 
     private final Clan[][] answerMapping = {
-            { Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH },
-            { Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH },
-            { Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH },
-            { Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH },
-            { Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH },
-            { Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH },
-            { Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH },
-            { Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH },
-            { Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH },
-            { Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH }
+            {Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH},
+            {Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH},
+            {Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH},
+            {Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH},
+            {Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH},
+            {Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH},
+            {Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH},
+            {Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH},
+            {Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH},
+            {Clan.AIR, Clan.FIRE, Clan.WATER, Clan.EARTH}
     };
+
+    /* =========================
+       SHUFFLE STATE
+       ========================= */
+
+    private final List<Integer> shuffledAnswerOrder = new ArrayList<>();
+
+    private void shuffleAnswers() {
+        shuffledAnswerOrder.clear();
+        for (int i = 0; i < 4; i++) {
+            shuffledAnswerOrder.add(i);
+        }
+        Collections.shuffle(shuffledAnswerOrder);
+    }
 
     /* =========================
        CONSTRUCTOR
@@ -135,7 +154,6 @@ public class QuizScreen extends Screen {
     @Override
     protected void init() {
         this.clearChildren();
-
         int centerX = this.width / 2;
 
         // Welcome page
@@ -153,19 +171,19 @@ public class QuizScreen extends Screen {
             );
         }
 
-        // Quiz questions
+        // Quiz page
         if (currentPage == 1) {
-            int startY = this.height / 2 + 0;
+            int startY = this.height / 2 - 10;
             int buttonWidth = 280;
             int spacing = 28;
 
             for (int i = 0; i < 4; i++) {
-                int index = i;
+                int realIndex = shuffledAnswerOrder.get(i);
 
                 this.addDrawableChild(
                         ButtonWidget.builder(
-                                Text.literal(answers[currentQuestion][i]),
-                                button -> onAnswerSelected(index)
+                                Text.literal(answers[currentQuestion][realIndex]),
+                                button -> onAnswerSelected(realIndex)
                         ).dimensions(
                                 centerX - buttonWidth / 2,
                                 startY + i * spacing,
@@ -196,61 +214,33 @@ public class QuizScreen extends Screen {
 
     private void renderWelcomePage(DrawContext context) {
         String title = "Your Path Is Not Yet Written";
-        int titleWidth = this.textRenderer.getWidth(title);
+        int w = this.textRenderer.getWidth(title);
 
         context.drawTextWithShadow(
                 this.textRenderer,
                 title,
-                (this.width - titleWidth) / 2,
-                this.height / 2 - 40,
+                (this.width - w) / 2,
+                60,
                 0xFFFFFF
         );
-
-        Text intro = Text.literal(
-                "Magic responds not to strength, but to intent. "
-                        + "Answer the following questions honestly, "
-                        + "and the path that suits you will reveal itself."
-        );
-
-        int startY = this.height / 2 - 10;
-
-        for (var line : this.textRenderer.wrapLines(intro, 320)) {
-            int w = this.textRenderer.getWidth(line);
-            context.drawTextWithShadow(
-                    this.textRenderer,
-                    line,
-                    (this.width - w) / 2,
-                    startY,
-                    0xAAAAAA
-            );
-            startY += 10;
-        }
     }
 
     private void renderQuestionPage(DrawContext context) {
-        Text questionText = Text.literal(questions[currentQuestion]);
+        Text question = Text.literal(questions[currentQuestion]);
+        int y = 40;
 
-        int maxWidth = 300;
-        int lineHeight = 12;
-
-        var lines = this.textRenderer.wrapLines(questionText, maxWidth);
-
-        // Hoge vaste positie
-        int startY = 40;
-
-        for (var line : lines) {
+        for (var line : this.textRenderer.wrapLines(question, 300)) {
             int w = this.textRenderer.getWidth(line);
             context.drawTextWithShadow(
                     this.textRenderer,
                     line,
                     (this.width - w) / 2,
-                    startY,
+                    y,
                     0xFFFFFF
             );
-            startY += lineHeight;
+            y += 12;
         }
 
-        // Progress text (slechts één keer!)
         String progress = "Question " + (currentQuestion + 1) + " / " + questions.length;
         int pw = this.textRenderer.getWidth(progress);
 
@@ -258,13 +248,10 @@ public class QuizScreen extends Screen {
                 this.textRenderer,
                 progress,
                 (this.width - pw) / 2,
-                startY + 6,
+                y + 6,
                 0xAAAAAA
         );
-
-
     }
-
 
     /* =========================
        LOGIC
@@ -273,11 +260,12 @@ public class QuizScreen extends Screen {
     private void goToQuestions() {
         currentPage = 1;
         currentQuestion = 0;
+        shuffleAnswers();
         this.init();
     }
 
-    private void onAnswerSelected(int answerIndex) {
-        Clan clan = answerMapping[currentQuestion][answerIndex];
+    private void onAnswerSelected(int realIndex) {
+        Clan clan = answerMapping[currentQuestion][realIndex];
         clanScores[clan.ordinal()]++;
 
         currentQuestion++;
@@ -285,15 +273,36 @@ public class QuizScreen extends Screen {
         if (currentQuestion >= questions.length) {
             finishQuiz();
         } else {
+            shuffleAnswers();
             this.init();
         }
     }
 
     private void finishQuiz() {
         Clan result = getResultClan();
-        System.out.println("Quiz finished. Result: " + result);
-        this.close();
+
+        if (this.client != null && this.client.player != null) {
+            // Stuur dit naar de server
+            this.client.execute(() -> {
+                if (this.client.player instanceof net.minecraft.client.network.ClientPlayerEntity clientPlayer) {
+                    // Server logica via interaction
+                    clientPlayer.networkHandler.sendChatCommand(
+                            "tag @s add wizardry_clan_" + result.name().toLowerCase()
+                    );
+                }
+            });
+        }
+
+        // Open reveal screen (CLIENT ONLY)
+        if (this.client != null) {
+            this.client.setScreen(new ClanRevealScreen(result));
+        }
     }
+
+
+
+
+
 
     private Clan getResultClan() {
         Clan best = Clan.AIR;
@@ -306,7 +315,6 @@ public class QuizScreen extends Screen {
                 best = clan;
             }
         }
-
         return best;
     }
 
