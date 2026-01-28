@@ -3,8 +3,11 @@
 	"package": "net.sadinity.wizardry.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+		"PlayerEntityMixin"
 	],
+	"client": [],
+	"server": [],
+
 	"injectors": {
 		"defaultRequire": 1
 	},

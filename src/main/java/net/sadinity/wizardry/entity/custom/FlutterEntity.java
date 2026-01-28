@@ -1,5 +1,8 @@
 package net.sadinity.wizardry.entity.custom;
 
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -39,6 +42,12 @@ public class FlutterEntity extends TameableEntity {
     }
 
 
+    public static DefaultAttributeContainer.Builder createFlutterAttributes() {
+        return MobEntity.createMobAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
+                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.4);
+    }
 
 
     // 🔹 ATTRIBUTES

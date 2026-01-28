@@ -2,10 +2,10 @@
 	"schemaVersion": 1,
 	"id": "wizardry",
 	"version": "${version}",
-	"name": "wizardry",
+	"name": "Wizardry",
 	"description": "You're a wizard Steve!",
 	"authors": [
-		"sadi :P"
+		"sadinity :P"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
@@ -34,5 +34,6 @@
 		"minecraft": "~1.21.1",
 		"java": ">=21",
 		"fabric-api": "*"
+
 	}
 }

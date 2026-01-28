@@ -39,7 +39,8 @@ public class FlutterModel extends SinglePartEntityModel<FlutterEntity> {
     private final ModelPart wingR;
 
     public FlutterModel(ModelPart root) {
-        this.full2 = root.getChild("full2");
+        ModelPart main = root.getChild("main");
+        this.full2 = main.getChild("full2");
         this.full = this.full2.getChild("full");
         this.head = this.full.getChild("head");
         this.body = this.full.getChild("body");
@@ -60,10 +61,26 @@ public class FlutterModel extends SinglePartEntityModel<FlutterEntity> {
 
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
-        ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData full2 = modelPartData.addChild("full2", ModelPartBuilder.create(), ModelTransform.of(0.0F, 24.0F, 0.0F, 0.0F, 1.5708F, 0.0F));
+        ModelPartData root = modelData.getRoot();
 
-        ModelPartData full = full2.addChild("full", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        ModelPartData main = root.addChild(
+                "main",
+                ModelPartBuilder.create(),
+                ModelTransform.NONE
+        );
+
+        ModelPartData full2 = main.addChild(
+                "full2",
+                ModelPartBuilder.create(),
+                ModelTransform.of(0.0F, 24.0F, 0.0F, 0.0F, 1.5708F, 0.0F)
+        );
+
+        ModelPartData full = full2.addChild(
+                "full",
+                ModelPartBuilder.create(),
+                ModelTransform.pivot(0.0F, 0.0F, 0.0F)
+        );
+
 
         ModelPartData head = full.addChild("head", ModelPartBuilder.create().uv(20, 23).cuboid(0.7F, -2.0F, -2.0F, 1.0F, 2.0F, 3.0F, new Dilation(0.0F))
                 .uv(0, 13).cuboid(-3.0F, -4.0F, -3.0F, 4.0F, 4.0F, 5.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -18.0F, 0.0F));

@@ -1,0 +1,13 @@
+{
+  "id": "wizardry:fire/fire_affinity_1",
+  "element": "fire",
+  "icon": "wizardry:fire_orb",
+  "cost": 1,
+  "parents": ["wizardry:fire/root"],
+  "requirements": [],
+  "effects": [
+    { "type": "unlock_tag", "tag": "fire_magic" }
+  ],
+  "position": { "x": 0, "y": 0 },
+  "lore": "Your bond with fire awakens."
+}
