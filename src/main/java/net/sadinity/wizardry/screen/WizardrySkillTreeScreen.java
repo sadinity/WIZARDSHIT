@@ -3,34 +3,74 @@ package net.sadinity.wizardry.screen;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
+import net.sadinity.wizardry.skilltree.SkillNode;
+import net.sadinity.wizardry.screen.widget.SkillButton;
+import net.sadinity.wizardry.skilltree.SkillNodeType;
 
 public class WizardrySkillTreeScreen extends Screen {
 
+    private static final Identifier BACKGROUND =
+            Identifier.of("wizardry", "textures/gui/skilltree.png");
+
+    private static final int BG_WIDTH = 256;
+    private static final int BG_HEIGHT = 256;
+
+    private int bgX;
+    private int bgY;
+
     public WizardrySkillTreeScreen() {
-        super(Text.literal("Wizardry Skill Tree"));
+        super(Text.literal("Skill Tree"));
+    }
+
+    @Override
+    public boolean shouldPause() {
+        return false; // geen blur / pause
     }
 
     @Override
     protected void init() {
-        // later: skill nodes
+        // Widgets resetten bij heropenen
+        this.clearChildren();
+
+        // Achtergrond centreren
+        this.bgX = (this.width - BG_WIDTH) / 2;
+        this.bgY = (this.height - BG_HEIGHT) / 2;
+
+        SkillNode quizRoot = new SkillNode(
+                Identifier.of("wizardry", "quiz_root"),
+                Identifier.of("wizardry", "textures/item/quiz_item.png"),
+                BG_WIDTH / 2 - 8,
+                BG_HEIGHT / 2 - 8,
+                SkillNodeType.ROOT
+        );
+
+
+        this.addDrawableChild(
+                new SkillButton(
+                        bgX + quizRoot.x,
+                        bgY + quizRoot.y,
+                        quizRoot
+                )
+        );
     }
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
 
-        // Achtergrond (donker)
-        context.fill(0, 0, this.width, this.height, 0xFF0A0A0A);
+        // GUI achtergrond
+        context.drawTexture(
+                BACKGROUND,
+                bgX,
+                bgY,
+                0,
+                0,
+                BG_WIDTH,
+                BG_HEIGHT,
+                BG_WIDTH,
+                BG_HEIGHT
+        );
 
-        if (this.textRenderer != null) {
-            context.drawCenteredTextWithShadow(
-                    this.textRenderer,
-                    this.title,
-                    this.width / 2,
-                    20,
-                    0xFFFFFF
-            );
-
-            super.render(context, mouseX, mouseY, delta);
-        }
+        super.render(context, mouseX, mouseY, delta);
     }
 }
